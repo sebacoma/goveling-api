@@ -10,9 +10,9 @@ export class AuthGuard implements CanActivate {
   private readonly googleClientId: string;
 
   constructor(private readonly configService: ConfigService) {
-    this.supabaseUrl = this.configService.get<string>('SUPABASE_URL');
-    this.supabaseApiKey = this.configService.get<string>('SUPABASE_APIKEY');
-    this.googleClientId = this.configService.get<string>('GOOGLE_CLIENT_ID');
+    this.supabaseUrl = this.configService.get<string>('SUPABASE_URL') ?? '';
+    this.supabaseApiKey = this.configService.get<string>('SUPABASE_APIKEY') ?? '';
+    this.googleClientId = this.configService.get<string>('GOOGLE_CLIENT_ID') ?? '';
   }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
