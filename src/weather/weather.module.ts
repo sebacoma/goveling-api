@@ -4,6 +4,6 @@ import { WeatherController } from './weather.controller';
 
 @Module({
   providers: [WeatherService],
-  controllers: [WeatherController]
+  controllers: [WeatherController],
 })
 export class WeatherModule {}

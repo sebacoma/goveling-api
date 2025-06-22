@@ -6,14 +6,17 @@ import axios from 'axios';
 export class LocationService {
   async getCityFromCoordinates(lat: number, lng: number): Promise<any> {
     try {
-      const response = await axios.get<NominatimResponse>('https://nominatim.openstreetmap.org/reverse', {
-        params: {
-          lat,
-          lon: lng,
-          format: 'json',
-        },
-        headers: { 'User-Agent': 'nest-app' },
-      });
+      const response = await axios.get<NominatimResponse>(
+        'https://nominatim.openstreetmap.org/reverse',
+        {
+          params: {
+            lat,
+            lon: lng,
+            format: 'json',
+          },
+          headers: { 'User-Agent': 'nest-app' },
+        }
+      );
 
       const address = response.data.address;
 
