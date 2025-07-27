@@ -1,4 +1,11 @@
-import { Controller, Get, Param, Query, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Query,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { GeoService } from './geo.service';
 import { Country, City } from './geo.interfaces';
 
@@ -9,7 +16,7 @@ export class GeoController {
   @Get(':type')
   async getGeoData(
     @Param('type') type: string,
-    @Query('country') countryCode?: string,
+    @Query('country') countryCode?: string
   ): Promise<Country[] | City[]> {
     const normalizedType = type.toLowerCase();
 
@@ -37,7 +44,7 @@ export class GeoController {
   @Get('search/cities')
   async searchCities(
     @Query('name') cityName: string,
-    @Query('limit') limit?: string,
+    @Query('limit') limit?: string
   ): Promise<City[]> {
     if (!cityName) {
       throw new BadRequestException('City name is required');

@@ -14,7 +14,7 @@ export class GeoService {
 
   private async queryDatabase<T = any>(query: string, params: any[] = []): Promise<T[]> {
     return new Promise((resolve, reject) => {
-      const db = new Database(this.dbPath, (err) => {
+      const db = new Database(this.dbPath, err => {
         if (err) {
           reject(new Error(`Database connection failed: ${err.message}`));
           return;
@@ -42,7 +42,7 @@ export class GeoService {
     // Verificar que el país existe
     const countryQuery = 'SELECT * FROM countries WHERE country_code = ?';
     const countries = await this.queryDatabase<Country>(countryQuery, [countryCode]);
-    
+
     if (countries.length === 0) {
       throw new NotFoundException(`Country with code '${countryCode}' not found`);
     }
@@ -59,7 +59,7 @@ export class GeoService {
       WHERE country_code = ? 
       ORDER BY population DESC
     `;
-    
+
     return this.queryDatabase<City>(citiesQuery, [countryCode]);
   }
 
@@ -83,7 +83,7 @@ export class GeoService {
       ORDER BY population DESC 
       LIMIT ?
     `;
-    
+
     return this.queryDatabase<City>(query, [`%${cityName}%`, limit]);
   }
 }
